@@ -1,0 +1,11 @@
+<div class="m-4">
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-3">{{ form_row(form.site) }}</div>
+        <div class="col-md-3">{{ form_row(form.numeroPage, {label: "Numéro de Page"}) }}</div>
+        <div class="col-md-3">{{ form_row(form.isbn, {label: "Ouvrage"}) }}</div>
+    </div>
+    {{ form_rest(form) }}
+    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}
+</div>

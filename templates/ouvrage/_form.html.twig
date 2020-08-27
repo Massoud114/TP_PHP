@@ -1,0 +1,14 @@
+<div class="m-4">
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-4 m-auto">{{ form_row(form.titre) }}</div>
+    </div>
+    <div class="row m-auto">
+        <div class="col-md-3">{{ form_row(form.ISBN) }}</div>
+        <div class="col-md-3">{{ form_row(form.pays) }}</div>
+        <div class="col-md-3">{{ form_row(form.nbPage) }}</div>
+    </div>
+        {{ form_rest(form) }}
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+</div>

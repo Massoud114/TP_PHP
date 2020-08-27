@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRUD Site{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Site - Index</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Nom de site</th>
+                    <th>Annee de couverture</th>
+                    <th>Pays</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for site in sites %}
+                <tr>
+                    <td>{{ site.nomSite }}</td>
+                    <td>{{ site.anneedecouv }}</td>
+                    <td>{{ site.pays }}</td>
+                    <td style="display: inline-flex">
+                        <a href="{{ path('site_edit', {'id': site.id}) }}" class="btn btn-primary">Modifier</a>
+                        <form method="post" action="{{ path('site_delete', {'id': site.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimé ?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ site.id) }}">
+                            <button class="btn btn-danger ml-4">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="small-text-center">
+            <p>{{ sites|length }} sites sont enregistrés au total</p>
+        </div>
+        <div class="text-right">
+            <a href="{{ path('site_new') }}" class="btn btn-primary">Créer un nouveau site</a>
+        </div>
+    </div>
+{% endblock %}

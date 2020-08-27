@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Site{% endblock %}
+
+{% block body %}
+    <h3 class="ml-4">Créer un nouveau Site</h3>
+
+    {{ include('site/_form.html.twig') }}
+
+    <a href="{{ path('site_index') }}" class="btn btn-warningm-4">Retour à la liste</a>
+{% endblock %}

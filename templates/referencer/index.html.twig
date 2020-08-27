@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRUD Referencer{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h3>Referencer - Index</h3>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Ouvrage</th>
+                    <th>Numéro de page</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for referencer in referencers %}
+                <tr>
+                    <td>{{ referencer.isbn.titre }}</td>
+                    <td>{{ referencer.numeroPage }}</td>
+                    <td style="display: inline-flex">
+                        <a href="{{ path('referencer_edit', {'id': referencer.id}) }}" class="btn btn-primary">Modifier</a>
+                        <form method="post" action="{{ path('referencer_delete', {'id': referencer.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimé ?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ referencer.id) }}">
+                            <button class="btn btn-danger ml-4">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="small-text-center">
+            <p>{{ referencers|length }} referencements sont enregistrés au total</p>
+        </div>
+        <div class="text-right">
+            <a href="{{ path('referencer_new') }}" class="btn btn-primary">Enregistrer un nouveau référencement</a>
+        </div>
+    </div>
+{% endblock %}

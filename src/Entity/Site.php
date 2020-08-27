@@ -25,7 +25,6 @@ class Site
 	 * @Assert\NotBlank(message="Le champ ne peut etre vide")
 	 * @Assert\Length(min="3", max="255", minMessage="Entrez une valeur entre 3 et 255", maxMessage="Entrez une valeur
 	 * entre 3 et 255")
-	 * @Assert\Unique(message="Cette valeur existe déja")
 	 */
     private $nomSite;
 
@@ -121,4 +120,9 @@ class Site
 
         return $this;
     }
+
+    public function __toString()
+	{
+		return $this->nomSite;
+	}
 }

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRUD Bibliotheque{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Bibliotheque - Index</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Musée</th>
+                    <th>Date d'achat</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for bibliotheque in bibliotheques %}
+                <tr>
+                    <td>{{ bibliotheque.numMus }}</td>
+                    <td>{{ bibliotheque.dateAchat ? bibliotheque.dateAchat|date('Y-m-d') : '' }}</td>
+                    <td style="display: inline-flex">
+                        <a href="{{ path('bibliotheque_edit', {'id': bibliotheque.id}) }}" class="btn btn-primary">Modifier</a>
+                        <form method="post" action="{{ path('bibliotheque_delete', {'id': bibliotheque.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimé ?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bibliotheque.id) }}">
+                            <button class="btn btn-danger ml-4">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="small-text-center">
+            <p>{{ bibliotheques|length }} bibliothèques sont enregistrés au total</p>
+        </div>
+        <div class="text-right">
+            <a href="{{ path('bibliotheque_new') }}" class="btn btn-primary">Créer une nouvelle bibliothèque</a>
+        </div>
+    </div>
+{% endblock %}

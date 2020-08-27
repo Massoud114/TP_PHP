@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Musee{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau Musee</h1>
+
+    {{ include('musee/_form.html.twig') }}
+
+    <a href="{{ path('musee_index') }}" class="btn btn-warning m-4">Retour à la liste</a>
+{% endblock %}

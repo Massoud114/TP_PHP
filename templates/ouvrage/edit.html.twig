@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'ouvrage{% endblock %}
+
+{% block body %}
+    <h1 class="m-4">Modifier l'ouvrage {{ ouvrage.titre }}</h1>
+
+    {{ include('ouvrage/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <form method="post" action="{{ path('ouvrage_delete', {'id': ouvrage.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer ?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ouvrage.id) }}">
+        <button class="btn btn-danger ml-4">Supprimer</button>
+    </form>
+
+    <a href="{{ path('ouvrage_index') }}" class="btn btn-warning m-4">Retour à la liste</a>
+
+{% endblock %}

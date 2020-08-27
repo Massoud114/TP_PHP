@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRUD Ouvrage{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Ouvrage - Index</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>ISBN</th>
+                    <th>Pays</th>
+                    <th>Nombre de pages</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ouvrage in ouvrages %}
+                <tr>
+                    <td>{{ ouvrage.titre }}</td>
+                    <td>{{ ouvrage.ISBN }}</td>
+                    <td>{{ ouvrage.pays }}</td>
+                    <td>{{ ouvrage.nbPage }}</td>
+                    <td style="display: inline-flex">
+                        <a href="{{ path('ouvrage_edit', {'id': ouvrage.id}) }}" class="btn btn-primary">Modifier</a>
+                        <form method="post" action="{{ path('ouvrage_delete', {'id': ouvrage.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer ?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ouvrage.id) }}">
+                            <button class="btn btn-danger ml-4">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="small-text-center">
+            <p>{{ ouvrages|length }} ouvrages sont enregistrés au total</p>
+        </div>
+        <div class="text-right">
+            <a href="{{ path('ouvrage_new') }}" class="btn btn-primary">Créer un nouvel ouvrage</a>
+        </div>
+    </div>
+{% endblock %}

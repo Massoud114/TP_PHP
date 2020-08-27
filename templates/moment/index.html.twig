@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Moment index{% endblock %}
+
+{% block body %}
+    <h1>Moment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jour</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for moment in moments %}
+            <tr>
+                <td>{{ moment.id }}</td>
+                <td>{{ moment.jour ? moment.jour|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('moment_edit', {'id': moment.id}) }}">edit</a>
+                    <form method="post" action="{{ path('moment_delete', {'id': moment.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ moment.id) }}">
+                        <button class="btn">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('moment_new') }}">Create new</a>
+{% endblock %}

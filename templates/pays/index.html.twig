@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRUD Pays{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h3>Pays - Index</h3>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Code Pays</th>
+                    <th>Nombre d'habitants</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for pay in pays %}
+                <tr>
+                    <td>{{ pay.codePays }}</td>
+                    <td>{{ pay.nbHabitant }}</td>
+                    <td style="display: inline-flex">
+                        <a href="{{ path('pays_edit', {'id': pay.id}) }}" class="btn btn-primary">Modifier</a>
+                        <form method="post" action="{{ path('pays_delete', {'id': pay.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pay.id) }}">
+                            <button class="btn btn-danger ml-4">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="small-text-center">
+            <p>{{ pays|length }} pays sont enregistrés au total</p>
+        </div>
+        <div class="text-right">
+            <a href="{{ path('pays_new') }}" class="btn btn-primary">Créer un nouveau Pays</a>
+        </div>
+    </div>
+{% endblock %}

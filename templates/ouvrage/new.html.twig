@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Ouvrage{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouvel ouvrage</h1>
+
+    {{ include('ouvrage/_form.html.twig') }}
+
+    <a href="{{ path('ouvrage_index') }}" class="btn btn-warning m-4">Retour à la liste</a>
+{% endblock %}

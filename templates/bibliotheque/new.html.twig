@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Bibliotheque{% endblock %}
+
+{% block body %}
+    <h3 class="ml-4">Créer une nouvelle Bibliotheque</h3>
+
+    {{ include('bibliotheque/_form.html.twig') }}
+
+    <a href="{{ path('bibliotheque_index') }}" class="btn btn-warning m-4">Retour à la liste</a>
+{% endblock %}

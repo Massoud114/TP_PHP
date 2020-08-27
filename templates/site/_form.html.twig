@@ -1,0 +1,11 @@
+<div class="m-4">
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-3">{{ form_row(form.nomSite) }}</div>
+        <div class="col-md-3">{{ form_row(form.anneedecouv) }}</div>
+        <div class="col-md-3">{{ form_row(form.pays) }}</div>
+    </div>
+    {{ form_rest(form) }}
+    <button class="btn btn-primary">{{ button_label|default('Enregistrement') }}</button>
+{{ form_end(form) }}
+</div>

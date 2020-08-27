@@ -24,7 +24,6 @@ class Musee
      * @ORM\Column(type="integer")
 	 * @Assert\NotBlank(message="Le champ ne peut etre vide")
 	 * @Assert\Type(type="numeric", message="Entrez une valeur numérique")
-	 * @Assert\Unique(message="Cette caleur existe déja")
 	 */
     private $numMus;
 
@@ -140,4 +139,9 @@ class Musee
 
         return $this;
     }
+
+    public function __toString()
+	{
+		return $this->nomMus;
+	}
 }

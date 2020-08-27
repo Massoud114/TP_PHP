@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'enregistrement{% endblock %}
+
+{% block body %}
+    <h1>Modifier la visite {{ visiter.id }}</h1>
+
+    {{ include('visiter/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <form method="post" action="{{ path('visiter_delete', {'id': visiter.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer ?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ visiter.id) }}">
+        <button class="btn btn-danger ml-4">Supprimer</button>
+    </form>
+
+    <a href="{{ path('visiter_index') }}" class="btn btn-warning m-4">Retour à la liste</a>
+
+{% endblock %}

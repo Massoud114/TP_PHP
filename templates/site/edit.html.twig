@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le Site{% endblock %}
+
+{% block body %}
+    <h1>Modifier le Site {{ site.nomSite }}</h1>
+
+    {{ include('site/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <form method="post" action="{{ path('site_delete', {'id': site.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ site.id) }}">
+        <button class="btn btn-danger ml-4">Supprimer</button>
+    </form>
+
+    <a href="{{ path('site_index') }}" class="btn btn-warning m-4">Retour à la liste</a>
+
+{% endblock %}

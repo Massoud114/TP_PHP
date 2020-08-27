@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Musee index{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Musee - Index</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Numéro Musée</th>
+                <th>Nom Musée</th>
+                <th>Nombre de Livres</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for musee in musees %}
+            <tr>
+                <td>{{ musee.numMus }}</td>
+                <td>{{ musee.nomMus }}</td>
+                <td>{{ musee.nbLivres }}</td>
+                <td style="display: inline-flex">
+                    <a href="{{ path('musee_edit', {'id': musee.id}) }}" class="btn btn-primary">Modifier</a>
+                    <form method="post" action="{{ path('musee_delete', {'id': musee.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer ?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ musee.id) }}">
+                        <button class="btn btn-danger ml-4">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="small-text-center">
+        <p>{{ musees|length }} musées sont enregistrés au total</p>
+    </div>
+    <div class="text-right">
+        <a href="{{ path('musee_new') }}" class="btn btn-primary">Créer un nouveau Musée</a>
+    </div>
+</div>
+{% endblock %}

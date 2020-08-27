@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le Musee {{ musee.nomMus }}{% endblock %}
+
+{% block body %}
+    <h1>Editer le musee {{ musee.nomMus }}</h1>
+
+    {{ include('musee/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <form method="post" action="{{ path('musee_delete', {'id': musee.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ musee.id) }}">
+        <button class="btn btn-danger ml-4">Supprimer</button>
+    </form>
+
+    <a href="{{ path('musee_index') }}" class="btn btn-warning m-4">Retour à l'index</a>
+{% endblock %}

@@ -1,0 +1,10 @@
+<div class="m-4">
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-3">{{ form_row(form.musee) }}</div>
+        <div class="col-md-3">{{ form_row(form.nbvisiteurs) }}</div>
+    </div>
+        {{ form_rest(form) }}
+        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+</div>

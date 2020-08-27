@@ -33,7 +33,6 @@ class Bibliotheque
     /**
      * @ORM\Column(type="date")
 	 * @Assert\NotBlank(message="Le champ ne peut etre vide")
-	 * @Assert\Date(message="Entre une date valide")
 	 */
     private $dateAchat;
 
