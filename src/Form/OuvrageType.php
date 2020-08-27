@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Musee;
 use App\Entity\Ouvrage;
 use App\Entity\Pays;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
