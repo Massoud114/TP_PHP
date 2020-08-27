@@ -15,3 +15,4 @@
 /phpunit.xml
 /.idea
 ###< symfony/phpunit-bridge ###
+src/DataFixtures/AppFixtures.php
