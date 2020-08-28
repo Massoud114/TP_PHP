@@ -3,11 +3,11 @@
 {% block title %}Modifier le Musee {{ musee.nomMus }}{% endblock %}
 
 {% block body %}
-    <h1>Editer le musee {{ musee.nomMus }}</h1>
+    <h3 class="ml-4">Editer le musée {{ musee.nomMus }}</h3>
 
     {{ include('musee/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <form method="post" action="{{ path('musee_delete', {'id': musee.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <form method="post" action="{{ path('musee_delete', {'id': musee.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimé ?');">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ musee.id) }}">
         <button class="btn btn-danger ml-4">Supprimer</button>
