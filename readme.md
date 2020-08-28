@@ -23,6 +23,7 @@ Ensuite, créer la base de donnée:
   1. Modifier la variable env `DATABASE_URL` dans le fichier `.env` .
   1. `php bin/console doctrine:database:create`
   1. `php bin/console doctrine:schema:create`
+  1. `php bin/console doctrine:fixtures:load` pour charger les données dans la base de données
 
 Le projet est amélioré en utilisant le Bundle [EasyAdmin][2].
 
